@@ -1,0 +1,18 @@
+<%= form_for @list, remote: true, authenticity_token: true do |f| %>
+  <ul class="list">
+    <%= f.fields_for :tasks do |task_fields| %>
+    <li class="task">
+      <label>
+        <%= task_fields.check_box :completed %>
+        <span><%= task_fields.object.title %></span>
+      </label>
+    </li>
+    <% end %>
+  </ul>
+
+  <%= f.fields_for :tasks, Task.new do |new_task_form| %>
+    <%= new_task_form.text_field :title, autofocus: true, id: "new_task_title" %>
+  <% end %>
+
+  <%#= f.submit "Update" %>
+<% end %>
